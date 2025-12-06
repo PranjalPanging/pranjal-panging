@@ -1,6 +1,5 @@
 import "../styles/globals.css";
 import type { Metadata } from "next";
-import type { ReactNode } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
@@ -23,11 +22,10 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Pranjal Panging" }],
   robots: "index, follow",
-  viewport: "width=device-width, initial-scale=1.0",
 
   openGraph: {
     title: "Pranjal Panging – Interested in AI, ML, Maths & Physics",
-    description: "A personal website showcasing projects, .",
+    description: "A personal website showcasing projects.",
     url: "https://pranjal-panging.vercel.app",
     siteName: "Pranjal Panging Personal Website",
     images: [
@@ -56,9 +54,14 @@ export const metadata: Metadata = {
     shortcut: "/favicons/favicon-16x16.png",
     apple: "/favicons/apple-touch-icon.png",
   },
-
-  themeColor: "#0a192f",
 };
+
+export function generateViewport() {
+  return {
+    viewport: "width=device-width, initial-scale=1.0",
+    themeColor: "#0a192f",
+  };
+}
 
 export default function RootLayout({
   children,
