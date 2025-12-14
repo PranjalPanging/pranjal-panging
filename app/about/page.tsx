@@ -64,24 +64,7 @@ export default function AboutSection() {
           className="bg-white/10 backdrop-blur-lg p-10 rounded-2xl shadow-xl border border-white/20"
         >
           <p className="text-lg md:text-xl leading-relaxed mb-6">
-            My name is Pranjal Panging. I am a student in Class 11, and I am
-            focusing on improving myself in all my subjects, especially Physics,
-            Chemistry, and Math. I try to study in a consistent way, understand
-            each concept slowly and clearly, and build my knowledge step by step
-            so that I can perform well in my exams and feel confident about what
-            I’m learning. I have a strong interest in coding, and I want to
-            explore the fields of AI, machine learning, and deep learning in the
-            future because I find the idea of creating intelligent systems and
-            solving real-world problems with technology very exciting. I am also
-            interested in linguistics, as I enjoy understanding how languages
-            work and how communication shapes the way people think. Even though
-            I follow politics and stay aware of what is happening around me, I
-            try not to get too involved because it can sometimes feel
-            overwhelming or distracting. Outside my studies, I enjoy spending my
-            time playing and watching football and volleyball, since both sports
-            keep me active and help me stay balanced. I also like solving the
-            Rubik’s Cube, which challenges my mind, improves my logical
-            thinking, and gives me a sense of satisfaction when I complete it.
+            My name is Pranjal Panging.
           </p>
         </motion.div>
       </motion.div>
