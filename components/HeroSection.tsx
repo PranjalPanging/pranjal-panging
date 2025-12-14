@@ -57,8 +57,7 @@ export default function HeroSection() {
           Hi, I&apos;m Pranjal Panging
         </h1>
         <p className="text-lg md:text-xl mb-8 drop-shadow-md">
-          Enthusiastic about coding, mathematics, and discovering new ideas. I
-          love building web apps that make an impact.
+          I love coding, mathematics, and linguistics.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
