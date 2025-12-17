@@ -27,11 +27,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Pranjal Panging – Interested in AI, ML, Maths & Physics",
     description: "A personal website showcasing projects.",
-    url: "https://pranjal-panging.vercel.app",
+    url: "https://pranjalpanging.vercel.app",
     siteName: "Pranjal Panging Personal Website",
     images: [
       {
-        url: "https://pranjal-panging.vercel.app/favicons/og-image.png",
+        url: "https://pranjalpanging.vercel.app/favicons/og-image.png",
         width: 1200,
         height: 630,
         alt: "Pranjal Panging Personal Website",
@@ -46,8 +46,8 @@ export const metadata: Metadata = {
     title: "Pranjal Panging - Interested in AI, ML, Maths & Physics",
     description:
       "Showcasing projects, AI/ML skills, and my interests in Maths & Physics.",
-    images: ["https://pranjal-panging.vercel.app/favicons/og-image.png"],
-    creator: "@YourTwitterHandle",
+    images: ["https://pranjalpanging.vercel.app/favicons/og-image.png"],
+    creator: "@pranjalpanging_",
   },
 
   icons: {
