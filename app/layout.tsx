@@ -5,48 +5,91 @@ import Footer from "@/components/Footer";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata: Metadata = {
-  title: "Pranjal Panging – Interested in AI, ML, Maths & Physics",
+  metadataBase: new URL("https://pranjalpanging.vercel.app"),
+
+  title: {
+    default: "Pranjal Panging – AI, ML, Maths & Physics Enthusiast",
+    template: "%s | Pranjal Panging",
+  },
+
   description:
-    "Welcome to the personal website of Pranjal Panging. Explore my projects, skills in AI & Web Development, and my passion for Maths and Physics.",
+    "Pranjal Panging is a student developer passionate about Artificial Intelligence, Machine Learning, Mathematics, and Physics. Explore projects, skills, and a growing STEM journey.",
+
+  applicationName: "Pranjal Panging Portfolio",
+  category: "Technology",
+
   keywords: [
     "Pranjal Panging",
-    "Portfolio",
-    "Developer",
-    "AI",
+    "Pranjal Panging Portfolio",
+    "Student Developer",
+    "AI Enthusiast",
     "Machine Learning",
-    "Maths",
+    "Web Development",
+    "Mathematics",
     "Physics",
-    "STEM",
-    "Coding",
-    "Projects",
+    "STEM Student",
+    "Coding Projects",
     "Personal Website",
   ],
+
   authors: [{ name: "Pranjal Panging" }],
-  robots: "index, follow",
+  creator: "Pranjal Panging",
+  publisher: "Pranjal Panging",
+
+  alternates: {
+    canonical: "https://pranjalpanging.vercel.app",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+    },
+  },
+
+  referrer: "origin-when-cross-origin",
+  themeColor: "#0f172a",
+
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+
+  verification: {
+    google: "GOOGLE_SEARCH_CONSOLE_CODE_HERE",
+  },
 
   openGraph: {
-    title: "Pranjal Panging – Interested in AI, ML, Maths & Physics",
-    description: "A personal website showcasing projects.",
+    title: "Pranjal Panging – AI, ML, Maths & Physics Enthusiast",
+    description:
+      "Student developer exploring AI, Machine Learning, Mathematics, and Physics. Discover projects and skills.",
     url: "https://pranjalpanging.vercel.app",
     siteName: "Pranjal Panging Personal Website",
+    locale: "en_US",
+    type: "website",
     images: [
       {
-        url: "https://pranjalpanging.vercel.app/favicons/og-image.png",
+        url: "/favicons/og-image.png",
         width: 1200,
         height: 630,
         alt: "Pranjal Panging Personal Website",
       },
     ],
-    locale: "en_US",
-    type: "website",
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "Pranjal Panging - Interested in AI, ML, Maths & Physics",
+    title: "Pranjal Panging – AI, ML, Maths & Physics Enthusiast",
     description:
-      "Showcasing projects, AI/ML skills, and my interests in Maths & Physics.",
-    images: ["https://pranjalpanging.vercel.app/favicons/og-image.png"],
+      "Projects, AI/ML skills, and interests in Mathematics & Physics.",
+    images: ["/favicons/og-image.png"],
     creator: "@pranjalpanging_",
   },
 
@@ -54,6 +97,21 @@ export const metadata: Metadata = {
     icon: "/favicons/favicon.ico",
     shortcut: "/favicons/favicon-16x16.png",
     apple: "/favicons/apple-touch-icon.png",
+  },
+
+  appleWebApp: {
+    capable: true,
+    title: "Pranjal Panging",
+    statusBarStyle: "black-translucent",
+  },
+
+  archives: ["https://pranjalpanging.vercel.app/projects"],
+  assets: ["https://pranjalpanging.vercel.app"],
+
+  other: {
+    "google-site-verification": "GOOGLE_SEARCH_CONSOLE_CODE_HERE",
+    "msapplication-TileColor": "#0f172a",
+    "msapplication-config": "/favicons/browserconfig.xml",
   },
 };
 
