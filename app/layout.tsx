@@ -63,7 +63,7 @@ export const metadata: Metadata = {
   },
 
   verification: {
-    google: "googlea9abbf93845e8e12.html",
+    google: "JfWB9MEO4HuBuFkpgAopL7Qq_4aaBmm8YDRJaW6lAqo",
   },
 
   openGraph: {
@@ -109,7 +109,7 @@ export const metadata: Metadata = {
   assets: ["https://pranjalpanging.vercel.app"],
 
   other: {
-    "google-site-verification": "googlea9abbf93845e8e12.html",
+    "google-site-verification": "JfWB9MEO4HuBuFkpgAopL7Qq_4aaBmm8YDRJaW6lAqo",
     "msapplication-TileColor": "#0f172a",
     "msapplication-config": "/favicons/browserconfig.xml",
   },
