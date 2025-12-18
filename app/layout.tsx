@@ -125,7 +125,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="flex flex-col min-h-screen">
         <Navbar />
-        {children}
+        <main>{children}</main>
         <SpeedInsights />
         <Footer />
       </body>

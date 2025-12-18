@@ -13,11 +13,12 @@ const footerLinks: FooterLink[] = [
   { name: "Blog", href: "/blog" },
   { name: "Publications", href: "/publications" },
   { name: "Contact", href: "/contact" },
+  { name: "Projects", href: "/projects" },
 ];
 
 const Footer: React.FC = () => {
   return (
-    <footer className="relative overflow-hidden mt-16 bg-black">
+    <footer className="relative overflow-hidden pt-16 bg-black border-none">
       <div className="absolute inset-0 z-0">
         {Array.from({ length: 80 }).map((_, i) => (
           <div
