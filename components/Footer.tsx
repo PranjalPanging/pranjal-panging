@@ -1,145 +1,96 @@
 "use client";
+
 import React from "react";
-import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
-
-interface FooterLink {
-  name: string;
-  href: string;
-}
-
-const footerLinks: FooterLink[] = [
-  { name: "Home", href: "/" },
-  { name: "About Me", href: "/about" },
-  { name: "Blog", href: "/blog" },
-  { name: "Publications", href: "/publications" },
-  { name: "Contact", href: "/contact" },
-  { name: "Projects", href: "/projects" },
-];
+import Link from "next/link";
+import { FaGithub, FaLinkedin, FaInstagram, FaEnvelope } from "react-icons/fa";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="relative overflow-hidden pt-16 bg-black border-none">
-      <div className="absolute inset-0 z-0">
-        {Array.from({ length: 80 }).map((_, i) => (
-          <div
-            key={i}
-            className="absolute bg-white rounded-full animate-move-star"
-            style={{
-              width: `${Math.random() * 2 + 1}px`,
-              height: `${Math.random() * 2 + 1}px`,
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              animationDuration: `${Math.random() * 60 + 40}s`,
-              animationDelay: `${Math.random() * 20}s`,
-              opacity: Math.random() * 0.8 + 0.2,
-            }}
-          ></div>
-        ))}
-      </div>
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center md:items-start space-y-10 md:space-y-0 text-white">
-        <div className="text-center md:text-left">
-          <h1 className="text-2xl md:text-3xl font-bold text-white drop-shadow-lg">
-            Pranjal Panging<span className="text-blue-400">.</span>
-          </h1>
-          <p className="mt-3 max-w-xs text-gray-300">
-            Enthusiastic about coding, mathematics, and discovering new ideas.
-            Welcome to my little corner of the universe.
-          </p>
-        </div>
-        <div className="flex flex-col items-center md:items-start">
-          <h2 className="font-semibold mb-3 relative text-white drop-shadow-md">
-            Explore
-            <span className="block w-10 h-0.5 bg-blue-400 mt-1 rounded"></span>
-          </h2>
-          <ul className="space-y-2">
-            {footerLinks.map((link: FooterLink) => (
-              <li key={link.name}>
-                <a
-                  href={link.href}
-                  className="text-gray-300 hover:text-blue-400 transition-colors duration-300"
-                >
-                  {link.name}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="flex flex-col items-center md:items-start space-y-3">
-          <h2 className="font-semibold mb-2 relative text-white drop-shadow-md">
-            Connect
-            <span className="block w-10 h-0.5 bg-blue-400 mt-1 rounded"></span>
-          </h2>
-          <div className="flex space-x-5">
-            <a
-              href="https://github.com/PranjalPanging"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-white transform hover:scale-110 transition-all duration-300 drop-shadow-md"
-            >
-              <FaGithub size={26} />
-            </a>
-            <a
-              href="https://linkedin.com/pranjalpanging"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-blue-400 transform hover:scale-110 transition-all duration-300 drop-shadow-md"
-            >
-              <FaLinkedin size={26} />
-            </a>
-            <a
-              href="https://instagram.com/pangnosis"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-pink-400 transform hover:scale-110 transition-all duration-300 drop-shadow-md"
-            >
-              <FaInstagram size={26} />
-            </a>
+    <footer className="bg-[#080808] text-white border-t border-white/10">
+      <div className="max-w-7xl mx-auto px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
+          <div className="md:col-span-6">
+            <h2 className="text-xl font-bold tracking-tight text-white">
+              Pranjal Panging<span className="text-blue-500">.</span>
+            </h2>
+            <p className="mt-4 text-sm text-gray-400 leading-relaxed max-w-sm">
+              Enthusiastic about coding, mathematics, and discovering new ideas.
+              Welcome to my little corner of the universe
+            </p>
+          </div>
+          <div className="md:col-span-6 grid grid-cols-2 gap-8">
+            <div className="flex flex-col gap-3">
+              <span className="text-[10px] uppercase tracking-[0.25em] text-gray-500 font-bold">
+                Explore
+              </span>
+              <FooterLink href="/" label="Home" />
+              <FooterLink href="/about" label="About Me" />
+              <FooterLink href="/projects" label="Projects" />
+              <FooterLink href="/research" label="Research" />
+              <FooterLink href="/blog" label="Blog" />
+            </div>
+            <div className="flex flex-col gap-3">
+              <span className="text-[10px] uppercase tracking-[0.25em] text-gray-500 font-bold">
+                Connect
+              </span>
+              <SocialLink
+                href="mailto:contact@pranjalpanging.com"
+                label="Contact"
+                icon={<FaEnvelope size={12} />}
+              />
+              <SocialLink
+                href="https://github.com/PranjalPanging"
+                label="GitHub"
+                icon={<FaGithub size={12} />}
+              />
+              <SocialLink
+                href="https://linkedin.com/in/pranjalpanging"
+                label="LinkedIn"
+                icon={<FaLinkedin size={12} />}
+              />
+              <SocialLink
+                href="https://instagram.com/pangnosis"
+                label="Instagram"
+                icon={<FaInstagram size={12} />}
+              />
+            </div>
           </div>
         </div>
+        <div className="mt-20 pt-8 border-t border-white/5">
+          <p className="text-[11px] text-gray-600 uppercase tracking-widest font-medium">
+            © 2025 Pranjal Panging
+          </p>
+        </div>
       </div>
-      <div className="relative z-10 text-center text-gray-400 text-sm py-5 border-t border-gray-700">
-        &copy; {new Date().getFullYear()} Pranjal Panging. All rights reserved.
-      </div>
-      <style jsx>{`
-        /* Moving Stars */
-        @keyframes moveStar {
-          0% {
-            transform: translate(0, 0) scale(1);
-            opacity: 0.2;
-          }
-          50% {
-            transform: translate(-50px, 30px) scale(1.3);
-            opacity: 1;
-          }
-          100% {
-            transform: translate(0, 0) scale(1);
-            opacity: 0.2;
-          }
-        }
-        .animate-move-star {
-          animation: moveStar infinite linear;
-        }
-
-        /* Shooting stars */
-        @keyframes shootingStar {
-          0% {
-            transform: translate(0, 0) scale(1);
-            opacity: 1;
-          }
-          100% {
-            transform: translate(300px, 200px) scale(0);
-            opacity: 0;
-          }
-        }
-        .animate-shooting-star {
-          animation: shootingStar 3s linear infinite;
-        }
-        .animate-shooting-star-delay {
-          animation: shootingStar 3s linear infinite 1.5s;
-        }
-      `}</style>
     </footer>
   );
 };
+const FooterLink = ({ href, label }: { href: string; label: string }) => (
+  <Link
+    href={href}
+    className="text-sm text-gray-400 hover:text-white transition-colors duration-200 inline-block"
+  >
+    {label}
+  </Link>
+);
+
+const SocialLink = ({
+  href,
+  label,
+  icon,
+}: {
+  href: string;
+  label: string;
+  icon: React.ReactNode;
+}) => (
+  <a
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors duration-200"
+  >
+    <span className="opacity-70">{icon}</span> {label}
+  </a>
+);
 
 export default Footer;

@@ -3,45 +3,44 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { FaArrowRight } from "react-icons/fa";
 
 export default function AboutPreview() {
   return (
-    <section
-      id="about-preview"
-      className="relative w-full py-28 px-6 bg-linear-to-r from-blue-600 to-indigo-600 text-white overflow-hidden"
-    >
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute w-72 h-72 bg-purple-500 rounded-full opacity-30 animate-ping -top-20 -left-16" />
-        <div className="absolute w-72 h-72 bg-pink-500 rounded-full opacity-20 animate-pulse bottom-0 right-0" />
-      </div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
-        viewport={{ once: true }}
-        className="relative z-10 max-w-3xl mx-auto text-center"
-      >
-        <h2 className="text-4xl md:text-5xl font-bold mb-8">About Me</h2>
-
+    <section id="about" className="py-16 px-6 bg-[#0f172a]">
+      <div className="max-w-5xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="bg-white/10 backdrop-blur-lg p-10 rounded-2xl shadow-xl border border-white/20"
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="p-8 md:p-12 rounded-2xl bg-[#111823] border border-slate-800 shadow-sm"
         >
-          <p className="text-lg md:text-xl leading-relaxed mb-6 whitespace-pre-line">
-            I’m Pranjal.
-          </p>
+          <div className="grid md:grid-cols-[1fr_auto_1fr] items-center gap-8 md:gap-12">
+            <div>
+              <h2 className="text-[10px] font-mono uppercase tracking-[0.4em] text-blue-500 mb-4">
+                Profile
+              </h2>
+              <p className="text-slate-300 leading-relaxed text-sm md:text-base">
+                I am a Class 11 student.
+              </p>
+            </div>
+            <div className="hidden md:block w-px h-16 bg-slate-800" />
+            <div className="flex flex-col justify-between h-full">
+              <p className="text-slate-400 text-sm mb-6 italic">
+                Currently working on my first math research paper.{" "}
+              </p>
 
-          <Link
-            href="/about"
-            className="inline-block mt-4 bg-white text-blue-600 font-semibold px-6 py-3 rounded-xl shadow hover:bg-gray-100 transition"
-          >
-            Read More →
-          </Link>
+              <Link
+                href="/about"
+                className="inline-flex items-center gap-2 text-[11px] font-bold text-white uppercase tracking-widest group"
+              >
+                Academic Journey
+                <FaArrowRight className="text-blue-500 group-hover:translate-x-2 transition-transform duration-300" />
+              </Link>
+            </div>
+          </div>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }

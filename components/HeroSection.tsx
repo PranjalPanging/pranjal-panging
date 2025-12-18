@@ -1,107 +1,165 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
-import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
+import React, { useRef, useState, useEffect } from "react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import {
+  FaGithub,
+  FaLinkedin,
+  FaInstagram,
+  FaChevronDown,
+} from "react-icons/fa";
 
-export default function HeroSection() {
+export default function UniqueHero() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePos({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+  });
+  const opacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.4], [1, 0.95]);
+
   return (
-    <section className="relative h-screen w-full bg-linear-to-r from-blue-600 via-purple-600 to-indigo-600 flex items-center justify-center text-white overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none">
+    <section
+      ref={containerRef}
+      className="relative h-[120vh] w-full bg-[#0f172a] overflow-hidden selection:bg-blue-500/30"
+    >
+      <div className="absolute inset-0 z-0">
         <motion.div
-          className="absolute w-72 h-72 bg-purple-500 rounded-full opacity-30 -top-16 -left-16"
-          animate={{ y: [0, 20, 0], x: [0, 15, 0], rotate: [0, 15, 0] }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-blue-600/10 blur-[120px]"
+          animate={{ scale: [1, 1.2, 1], x: [0, 30, 0] }}
+          transition={{ duration: 10, repeat: Infinity }}
         />
         <motion.div
-          className="absolute w-72 h-72 bg-pink-500 rounded-full opacity-20 bottom-0 right-0"
-          animate={{ y: [0, -15, 0], x: [0, -20, 0], rotate: [0, -10, 0] }}
-          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-purple-600/10 blur-[120px]"
+          animate={{ scale: [1.2, 1, 1.2], x: [0, -30, 0] }}
+          transition={{ duration: 12, repeat: Infinity }}
         />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-size:40px_40px" />
+        <div
+          className="absolute inset-0 opacity-[0.2] transition-opacity duration-500"
+          style={{
+            background: `radial-gradient(600px circle at ${mousePos.x}px ${mousePos.y}px, rgba(59, 130, 246, 0.3), transparent 40%)`,
+          }}
+        />
+      </div>
+      <div className="absolute inset-0 pointer-events-none font-mono text-[10px] uppercase tracking-tighter text-blue-400/20">
         <motion.div
-          className="absolute w-56 h-56 bg-blue-400 rounded-full opacity-20 top-1/3 left-1/4"
-          animate={{ y: [0, 10, 0], x: [0, 10, 0], rotate: [0, 5, 0] }}
-          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-        />
-        {Array.from({ length: 50 }).map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute bg-white rounded-full"
-            style={{
-              width: `${Math.random() * 2 + 1}px`,
-              height: `${Math.random() * 2 + 1}px`,
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              opacity: Math.random() * 0.6 + 0.2,
-            }}
-            animate={{
-              y: [0, Math.random() * 10 - 5, 0],
-              x: [0, Math.random() * 10 - 5, 0],
-            }}
-            transition={{
-              duration: Math.random() * 10 + 5,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-        ))}
+          style={{ y: useTransform(scrollYProgress, [0, 1], [0, -250]) }}
+          className="absolute top-[20%] left-[8%] rotate-90 origin-left"
+        >
+          Structure :: $S \rightarrow NP \ VP$
+        </motion.div>
+        <motion.div
+          style={{ y: useTransform(scrollYProgress, [0, 1], [0, -450]) }}
+          className="absolute bottom-[25%] right-[8%] -rotate-90 origin-right"
+        >
+          Entropy :: $H(X) = -\sum P(x)\log P(x)$
+        </motion.div>
       </div>
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
-        viewport={{ once: true }}
-        className="relative z-10 text-center px-4 max-w-2xl"
+        style={{ opacity, scale }}
+        className="sticky top-0 h-screen w-full flex flex-col items-center justify-center z-10 px-6"
       >
-        <h1 className="text-5xl md:text-6xl font-bold mb-4 drop-shadow-lg">
-          Hi, I&apos;m Pranjal Panging
-        </h1>
-        <p className="text-lg md:text-xl mb-8 drop-shadow-md">
-          I love coding, mathematics, and linguistics.
-        </p>
+        <div className="relative p-12 md:p-20 rounded-[4rem] bg-white/2 border border-white/10 backdrop-blur-3xl shadow-2xl">
+          <div className="absolute top-8 left-8 w-4 h-4 border-t-2 border-l-2 border-blue-500/50" />
+          <div className="absolute bottom-8 right-8 w-4 h-4 border-b-2 border-r-2 border-purple-500/50" />
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
-          <a
-            href="#about"
-            className="px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg shadow-lg hover:bg-gray-100 transition-colors duration-200"
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            className="text-center"
           >
-            Learn More
-          </a>
-          <a
-            href="#contact"
-            className="px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-400 transition-colors duration-200"
+            <span className="inline-block px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-bold tracking-[0.4em] mb-8 uppercase">
+              Portfolio v2.0
+            </span>
+            <h1 className="text-6xl md:text-[8rem] font-black text-white leading-none tracking-tighter uppercase mb-2">
+              Pranjal
+              <br />
+              <span className="text-transparent bg-clip-text bg-linear-to-b from-white to-slate-500">
+                Panging
+              </span>
+            </h1>
+            <p className="text-slate-400 font-mono text-[11px] md:text-xs tracking-[0.5em] uppercase mt-6">
+              Logic • Structure • Syntax
+            </p>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1 }}
+            className="mt-12 flex flex-col md:flex-row items-center justify-center gap-8"
           >
-            Contact Me
-          </a>
-        </div>
+            <motion.a
+              href="#projects"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-10 py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold uppercase text-[10px] tracking-[0.2em] rounded-xl transition-all shadow-lg shadow-blue-900/20"
+            >
+              Initialize Exploration
+            </motion.a>
 
-        <div className="flex gap-6 justify-center mt-4 text-2xl">
-          <a
-            href="https://github.com/PranjalPanging"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-gray-200 transition-colors duration-300"
-          >
-            <FaGithub />
-          </a>
-          <a
-            href="https://linkedin.com/in/pranjalpanging"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-blue-300 transition-colors duration-300"
-          >
-            <FaLinkedin />
-          </a>
-          <a
-            href="https://instagram.com/pangnosis"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-pink-400 transition-colors duration-300"
-          >
-            <FaInstagram />
-          </a>
+            <div className="flex items-center gap-6">
+              {[
+                {
+                  icon: <FaGithub />,
+                  link: "https://github.com/PranjalPanging",
+                },
+                { icon: <FaLinkedin />, link: "#" },
+                { icon: <FaInstagram />, link: "#" },
+              ].map((social, idx) => (
+                <motion.a
+                  key={idx}
+                  href={social.link}
+                  target="_blank"
+                  whileHover={{ y: -3, color: "#60a5fa" }}
+                  className="text-slate-500 text-xl transition-colors"
+                >
+                  {social.icon}
+                </motion.a>
+              ))}
+            </div>
+          </motion.div>
         </div>
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="absolute bottom-10 flex flex-col items-center gap-2 opacity-50"
+        >
+          <span className="text-[9px] text-slate-500 font-mono tracking-widest uppercase">
+            Scroll to Deepen
+          </span>
+          <FaChevronDown className="text-blue-500" />
+        </motion.div>
       </motion.div>
+      <div className="absolute right-10 top-1/2 -translate-y-1/2 hidden lg:flex flex-col gap-6 z-20">
+        {[0, 1, 2].map((i) => (
+          <div
+            key={i}
+            className="w-2px h-12 bg-white/5 relative rounded-full overflow-hidden"
+          >
+            <motion.div
+              className="absolute inset-0 bg-blue-500 origin-top"
+              style={{ scaleY: smoothProgress }}
+            />
+          </div>
+        ))}
+      </div>
     </section>
   );
 }
