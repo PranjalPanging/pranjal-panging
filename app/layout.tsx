@@ -1,5 +1,5 @@
 import "../styles/globals.css";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { SpeedInsights } from "@vercel/speed-insights/next"
@@ -9,12 +9,12 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://pranjalpanging.vercel.app"),
 
   title: {
-    default: "Pranjal Panging – AI, ML, Maths & Physics Enthusiast",
+    default: "Pranjal Panging – Portfolio",
     template: "%s | Pranjal Panging",
   },
 
   description:
-    "Pranjal Panging is a student developer passionate about Artificial Intelligence, Machine Learning, Mathematics, and Physics. Explore projects, skills, and a growing STEM journey.",
+    "Pranjal Panging is a student developer specializing in AI, Rust, and C++. Exploring the intersection of High-Performance Computing, Mathematics, and Physics.",
 
   applicationName: "Pranjal Panging Portfolio",
   category: "Technology",
@@ -24,7 +24,11 @@ export const metadata: Metadata = {
     "Pranjal Panging Portfolio",
     "Student Developer",
     "AI Enthusiast",
+    "Rust Developer",
+    "C++ Developer",
+    "High-Performance Computing",
     "Machine Learning",
+    "Systems Programming",
     "Web Development",
     "Mathematics",
     "Physics",
@@ -68,9 +72,9 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "Pranjal Panging – AI, ML, Maths & Physics Enthusiast",
+    title: "Pranjal Panging – Portfolio",
     description:
-      "Student developer exploring AI, Machine Learning, Mathematics, and Physics. Discover projects and skills.",
+      "Pranjal Panging is a student developer specializing in AI, Rust, and C++. Exploring the intersection of High-Performance Computing, Mathematics, and Physics.",
     url: "https://pranjalpanging.vercel.app",
     siteName: "Pranjal Panging Personal Website",
     locale: "en_US",
@@ -114,6 +118,12 @@ export const metadata: Metadata = {
     "msapplication-TileColor": "#0f172a",
     "msapplication-config": "/favicons/browserconfig.xml",
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#0f172a",
 };
 
 export default function RootLayout({

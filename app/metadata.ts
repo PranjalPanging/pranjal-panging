@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Pranjal Panging – AI, ML, Maths & Physics Enthusiast",
-  description: "...",
+  title: "Pranjal Panging – Portfolio",
+  description: "Pranjal Panging is a student developer specializing in AI, Rust, and C++. Exploring the intersection of High-Performance Computing, Mathematics, and Physics.",
   other: {
     "application/ld+json": JSON.stringify({
       "@context": "https://schema.org",
