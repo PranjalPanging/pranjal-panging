@@ -86,7 +86,7 @@ export default function UniqueHero() {
             className="text-center"
           >
             <span className="inline-block px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-bold tracking-[0.4em] mb-8 uppercase">
-              Portfolio v2.0
+              Portfolio
             </span>
             <h1 className="text-6xl md:text-[8rem] font-black text-white leading-none tracking-tighter uppercase mb-2">
               Pranjal
@@ -106,7 +106,7 @@ export default function UniqueHero() {
             className="mt-12 flex flex-col md:flex-row items-center justify-center gap-8"
           >
             <motion.a
-              href="#projects"
+              href="/projects"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="px-10 py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold uppercase text-[10px] tracking-[0.2em] rounded-xl transition-all shadow-lg shadow-blue-900/20"
