@@ -75,7 +75,7 @@ export default function ProfessionalContact() {
                   <ContactMetric
                     icon={<FaEnvelope />}
                     label="Gateway"
-                    value="pranjal@dev.log"
+                    value="pranjalpanging70@gmail.com"
                   />
                   <ContactMetric
                     icon={<FaMapMarkerAlt />}
