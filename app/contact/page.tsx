@@ -119,7 +119,7 @@ export default function ProfessionalContact() {
                         htmlFor="name"
                         className="text-[10px] font-mono uppercase tracking-[0.3em] text-zinc-500"
                       >
-                        01. Identity
+                        Enter Your Name
                       </Label>
                       <Input
                         id="name"
@@ -133,7 +133,7 @@ export default function ProfessionalContact() {
                         htmlFor="email"
                         className="text-[10px] font-mono uppercase tracking-[0.3em] text-zinc-500"
                       >
-                        02. Return_Path
+                        Enter Your Email
                       </Label>
                       <Input
                         id="email"
@@ -148,9 +148,9 @@ export default function ProfessionalContact() {
                   <div className="space-y-3">
                     <Label
                       htmlFor="message"
-                      className="text-[10px] font-mono uppercase tracking-[0.3em] text-zinc-500"
+                      className="text-10px font-mono uppercase tracking-[0.3em] text-zinc-500"
                     >
-                      03. Payload
+                      Enter Your Message
                     </Label>
                     <Textarea
                       id="message"
