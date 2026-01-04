@@ -1,165 +1,116 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import {
-  FaGithub,
-  FaLinkedin,
-  FaInstagram,
-  FaChevronDown,
-} from "react-icons/fa";
 
-export default function UniqueHero() {
+export default function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start start", "end start"],
+    offset: ["start start", "end end"],
   });
 
-  const smoothProgress = useSpring(scrollYProgress, {
+  const smoothScroll = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
+    restDelta: 0.001,
   });
-  const opacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.4], [1, 0.95]);
+
+  const opacity = useTransform(smoothScroll, [0, 0.8], [1, 0]);
+  const imageScale = useTransform(smoothScroll, [0, 0.5], [1, 1.1]);
+  const textX = useTransform(smoothScroll, [0, 0.5], [0, 50]);
+
+  const displacement = useTransform(smoothScroll, [0, 1], [0, 100]);
 
   return (
-    <section
+    <div
       ref={containerRef}
-      className="relative h-[120vh] w-full bg-[#0f172a] overflow-hidden selection:bg-blue-500/30"
+      className="relative h-[180vh] bg-[#020617] overflow-hidden"
     >
-      <div className="absolute inset-0 z-0">
-        <motion.div
-          className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-blue-600/10 blur-[120px]"
-          animate={{ scale: [1, 1.2, 1], x: [0, 30, 0] }}
-          transition={{ duration: 10, repeat: Infinity }}
-        />
-        <motion.div
-          className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-purple-600/10 blur-[120px]"
-          animate={{ scale: [1.2, 1, 1.2], x: [0, -30, 0] }}
-          transition={{ duration: 12, repeat: Infinity }}
-        />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-size:40px_40px" />
-        <div
-          className="absolute inset-0 opacity-[0.2] transition-opacity duration-500"
-          style={{
-            background: `radial-gradient(600px circle at ${mousePos.x}px ${mousePos.y}px, rgba(59, 130, 246, 0.3), transparent 40%)`,
-          }}
-        />
-      </div>
-      <div className="absolute inset-0 pointer-events-none font-mono text-[10px] uppercase tracking-tighter text-blue-400/20">
-        <motion.div
-          style={{ y: useTransform(scrollYProgress, [0, 1], [0, -250]) }}
-          className="absolute top-[20%] left-[8%] rotate-90 origin-left"
-        >
-          Structure :: $S \rightarrow NP \ VP$
-        </motion.div>
-        <motion.div
-          style={{ y: useTransform(scrollYProgress, [0, 1], [0, -450]) }}
-          className="absolute bottom-[25%] right-[8%] -rotate-90 origin-right"
-        >
-          Entropy :: $H(X) = -\sum P(x)\log P(x)$
-        </motion.div>
-      </div>
-      <motion.div
-        style={{ opacity, scale }}
-        className="sticky top-0 h-screen w-full flex flex-col items-center justify-center z-10 px-6"
-      >
-        <div className="relative p-12 md:p-20 rounded-[4rem] bg-white/2 border border-white/10 backdrop-blur-3xl shadow-2xl">
-          <div className="absolute top-8 left-8 w-4 h-4 border-t-2 border-l-2 border-blue-500/50" />
-          <div className="absolute bottom-8 right-8 w-4 h-4 border-b-2 border-r-2 border-purple-500/50" />
+      <svg className="hidden">
+        <filter id="displacementFilter">
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="0.015"
+            numOctaves="2"
+            result="noise"
+          />
+          <motion.feDisplacementMap
+            in="SourceGraphic"
+            in2="noise"
+            scale={displacement}
+            xChannelSelector="R"
+            yChannelSelector="G"
+          />
+        </filter>
+      </svg>
 
+      <div className="sticky top-0 h-screen w-full flex items-center justify-center px-6 md:px-20 overflow-hidden">
+        <div className="absolute inset-0 z-0 pointer-events-none">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-            className="text-center"
-          >
-            <span className="inline-block px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-bold tracking-[0.4em] mb-8 uppercase">
-              Portfolio
-            </span>
-            <h1 className="text-6xl md:text-[8rem] font-black text-white leading-none tracking-tighter uppercase mb-2">
-              Pranjal
-              <br />
-              <span className="text-transparent bg-clip-text bg-linear-to-b from-white to-slate-500">
-                Panging
-              </span>
-            </h1>
-            <p className="text-slate-400 font-mono text-[11px] md:text-xs tracking-[0.5em] uppercase mt-6">
-              Logic • Structure • Syntax
-            </p>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1 }}
-            className="mt-12 flex flex-col md:flex-row items-center justify-center gap-8"
-          >
-            <motion.a
-              href="/projects"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-10 py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold uppercase text-[10px] tracking-[0.2em] rounded-xl transition-all shadow-lg shadow-blue-900/20"
-            >
-              Initialize Exploration
-            </motion.a>
+            style={{ y: useTransform(smoothScroll, [0, 1], [0, -100]) }}
+            className="absolute inset-0 bg-linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px) bg-size:4rem_4rem opacity-20"
+          />
+          <div className="absolute inset-0 bg-linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06)) bg-size:100%_2px,3px_100% pointer-events-none" />
+        </div>
 
-            <div className="flex items-center gap-6">
-              {[
-                {
-                  icon: <FaGithub />,
-                  link: "https://github.com/PranjalPanging",
-                },
-                { icon: <FaLinkedin />, link: "#" },
-                { icon: <FaInstagram />, link: "#" },
-              ].map((social, idx) => (
-                <motion.a
-                  key={idx}
-                  href={social.link}
-                  target="_blank"
-                  whileHover={{ y: -3, color: "#60a5fa" }}
-                  className="text-slate-500 text-xl transition-colors"
-                >
-                  {social.icon}
-                </motion.a>
-              ))}
+        <motion.div
+          style={{ opacity }}
+          className="relative z-10 w-full max-w-7xl flex flex-col md:flex-row items-center gap-12 md:gap-24"
+        >
+          <motion.div
+            style={{
+              scale: imageScale,
+              filter: "url(#displacementFilter)",
+            }}
+            className="relative group"
+          >
+            <div className="w-56 h-56 md:w-96 md:h-96 rounded-2xl overflow-hidden border border-blue-500/20 bg-slate-900/50 backdrop-blur-sm p-2 shadow-[0_0_50px_-12px_rgba(59,130,246,0.3)]">
+              <img
+                src="/images/myimages/pranjalpanging.avif"
+                alt="Pranjal Panging"
+                className="w-full h-full object-cover grayscale brightness-90 group-hover:grayscale-0 transition-all duration-700"
+              />
+            </div>
+            <div className="absolute -top-4 -right-4 font-mono text-[9px] text-blue-500/60 bg-slate-950 px-2 py-1 border border-blue-500/20">
+              0x42_LOGIC_INIT
             </div>
           </motion.div>
-        </div>
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="absolute bottom-10 flex flex-col items-center gap-2 opacity-50"
-        >
-          <span className="text-[9px] text-slate-500 font-mono tracking-widest uppercase">
-            Scroll to Deepen
-          </span>
-          <FaChevronDown className="text-blue-500" />
+
+          <div className="flex flex-col items-center md:items-start">
+            <motion.div style={{ x: textX }} className="space-y-0">
+              <h1 className="text-6xl sm:text-8xl lg:text-[10rem] font-black text-white leading-[0.75] tracking-tighter uppercase italic">
+                PRANJAL
+              </h1>
+              <h1 className="text-6xl sm:text-8xl lg:text-[10rem] font-black text-transparent [-webkit-text-stroke:1px_rgba(255,255,255,0.4)] leading-[0.75] tracking-tighter uppercase ml-4">
+                PANGING
+              </h1>
+            </motion.div>
+
+            <motion.p className="mt-12 max-w-md text-slate-400 text-sm md:text-lg font-light leading-relaxed text-center md:text-left">
+              I’m a full stack developer and student specializing in
+              <span className="text-white"> mathematical logic</span>.
+              Proficient in building systems with
+              <span className="text-blue-400"> Python</span>,
+              <span className="text-blue-400"> C++</span>, and
+              <span className="text-blue-400 italic"> Rust</span>.
+            </motion.p>
+          </div>
         </motion.div>
-      </motion.div>
-      <div className="absolute right-10 top-1/2 -translate-y-1/2 hidden lg:flex flex-col gap-6 z-20">
-        {[0, 1, 2].map((i) => (
-          <div
-            key={i}
-            className="w-2px h-12 bg-white/5 relative rounded-full overflow-hidden"
-          >
+
+        <div className="absolute right-10 top-1/2 -translate-y-1/2 hidden lg:flex flex-col items-center gap-4">
+          <span className="font-mono text-9px text-slate-600 rotate-90">
+            SCROLL
+          </span>
+          <div className="w-2px h-32 bg-slate-800 relative">
             <motion.div
-              className="absolute inset-0 bg-blue-500 origin-top"
-              style={{ scaleY: smoothProgress }}
+              style={{ scaleY: smoothScroll }}
+              className="absolute inset-0 bg-blue-500 origin-top shadow-0_0_10px_#3b82f6"
             />
           </div>
-        ))}
+        </div>
       </div>
-    </section>
+    </div>
   );
 }
