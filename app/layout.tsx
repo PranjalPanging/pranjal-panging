@@ -81,7 +81,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/favicons/og-image.png",
+        url: "images/myimages/pranjalpanging.avif",
         width: 1200,
         height: 630,
         alt: "Pranjal Panging Personal Website",
@@ -94,7 +94,7 @@ export const metadata: Metadata = {
     title: "Pranjal Panging – AI, ML, Maths & Physics Enthusiast",
     description:
       "Projects, AI/ML skills, and interests in Mathematics & Physics.",
-    images: ["/favicons/og-image.png"],
+    images: ["images/myimages/pranjalpanging.avif"],
     creator: "@pranjalpanging_",
   },
 
